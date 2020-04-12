@@ -1,0 +1,26 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+int main()
+{
+	int n;
+	cin>>n;
+	string s="";
+	while(true)
+	{
+		s+="47";
+		sort(s.begin(),s.end());
+		if(stoll(s)>=n){
+		cout<<s;break;}
+		while(next_permutation(s.begin(),s.end()))
+		{
+			if(stoll(s)>=n)
+			{
+				cout<<s;
+				return 0;
+			}
+		}
+	}
+	return 0;
+}
