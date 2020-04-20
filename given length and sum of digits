@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	int l,s;
+	cin>>l>>s;
+	int p=0;int a[l];
+	if(s==0 && l==1)
+	cout<<"0 0";
+	else if(!(s>0 && s<=9*l))
+	{
+		cout<<"-1"<<" "<<"-1";
+	}
+	else
+	{
+		while(s>=9)
+		{
+			a[p]=9;
+			p++;
+			s=s-9;
+		}
+		for(int i=p;i<l;i++)
+		{
+		a[p]=s;
+		s=s-a[p];
+		p++;
+		}
+		int b[l];
+		for(int i=0;i<l;i++)
+		{
+			b[i]=a[i];
+		}
+		if(a[p-1]==0)
+		{
+		 for(int i=p-1;i>=0;i--)
+		 {
+		  if(a[i]!=0)
+		  {
+			a[i]=a[i]-1;
+			break;
+		  }
+	 	 }
+	 	 a[p-1]=1;
+		}
+		for(int i=l-1;i>=0;i--)
+		cout<<a[i];
+		cout<<" ";
+		for(int i=0;i<l;i++)
+		cout<<b[i];
+	}
+	return 0;
+}
