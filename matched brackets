@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    cin>>a[i];
+    int l=0,d=0,ml=0,max=0,p,q;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]==1)
+        {
+            l++;
+            d++;
+        }
+        if(a[i]==2)
+        {
+            if(d>max)
+            {p=i;
+            max=d;}
+            d--;
+            l++;
+            if(d==0)
+            {
+                if(l>ml)
+                {
+                    ml=l;
+                    q=(i+1)-(l-1);
+                }
+                l=0;
+            }
+        }
+    }
+        cout<<max<<" "<<p<<" "<<ml<<" "<<q;
+    return 0;
+}
