@@ -1,0 +1,44 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using std::vector;
+
+bool greater(long long int a , long long int b)
+{
+    return a > b;
+}
+
+long long int optimal_weight(long long int W, vector<long long int> &w,vector<long long int> &v) 
+{
+    vector<vector<long long int> >K(w.size() + 1 , vector<long long int>(W + 1 , 0));
+
+    for (long long int i = 0; i <= w.size(); ++i)
+    {
+        for (long long int j = 0; j <= W; ++j)
+        {
+            if (i == 0 || j == 0)
+                K.at(i).at(j) = 0;
+            else if (w[i - 1] <= j)
+                K.at(i).at(j) = std::max(K.at(i - 1).at(j) , v[i - 1] + K.at(i - 1).at(j - w[i - 1]));
+            else
+                K.at(i).at(j) = K.at(i - 1).at(j);
+        }
+    }
+    return K.at(w.size()).at(W);
+}
+
+int main() 
+{
+    long long int n, W;
+    std::cin >> n >> W;
+    vector<long long int> w(n);
+    vector<long long int> v(n);
+    for (long long int i = 0; i < n; i++) 
+    {
+        std::cin >> w[i]>>v[i];;
+    }
+    long long int sum=optimal_weight(W,w,v);
+    std::cout<<sum;
+    return 0;
+}
