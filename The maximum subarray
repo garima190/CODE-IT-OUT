@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    for(int i=1;i<=t;i++)
+    {
+        int n;
+        cin>>n;
+        int a[n];int sump=0,sumn=0,s=0;
+        for(int j=0;j<n;j++)
+        {
+        cin>>a[j];
+        s+=a[j];
+        if(a[j]<0)
+        sumn+=a[j];
+        else
+        sump+=a[j];
+        }
+        int maxi=-1000000000;
+        if(sump==s)
+        {
+            cout<<sump<<" "<<sump<<"\n";
+        }
+        else if(sumn==s)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(a[j]>maxi)
+                maxi=a[j];
+            }
+            cout<<maxi<<" "<<maxi<<"\n";
+        }
+        else
+        {
+        int sum=0,max=0;
+        for(int j=0;j<n;j++)
+        {
+            sum+=a[j];
+            if(sum<0)
+            sum=0;
+            if(sum>max)
+            max=sum;
+        }
+        cout<<max<<" "<<sump<<"\n";
+        }
+    }
+}
