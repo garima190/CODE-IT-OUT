@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+struct ps
+{
+    long long int x,y,g;
+};
+struct ps egcd(long long int a,long long int b)
+{
+    if(b==0)
+    {
+        struct ps ans;
+        ans.g=a;
+        ans.y=0;
+        ans.x=1;
+        return ans;
+    }
+    struct ps small=egcd(b,a%b);
+    struct ps ans;
+    ans.g=small.g;
+    ans.x=small.y;
+    ans.y=small.x-(a/b)*small.y;
+    return ans;
+}
+int main()
+{
+    long long int n;
+    cin>>n;
+    long long int m=1000000007;
+    struct ps ans=egcd(n,m);
+    if(ans.g==1)
+    {
+        cout<<(ans.x+m)%m;
+    }
+    return 0;
+}
