@@ -1,0 +1,122 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() 
+{
+	string s;
+	cin>>s;
+	int a[26]={0};int p;char ch;int o;
+	char m[2][13];
+	for(int i=0;i<27;i++)
+	{
+		a[s[i]-'A']+=1;
+		if(a[s[i]-'A']>1)
+		{
+			p=i;
+			ch=s[i];break;
+		}
+	}
+	for(int i=0;i<27;i++)
+	{
+		if(s[i]==ch)
+		{
+			o=i;
+			break;
+		}
+	}
+	int y=p-o-1;
+	if(y==0)
+	{
+		cout<<"Impossible";
+		return 0;
+	}
+	else if(y%2==0)
+	{
+		int t=0,i;
+		int x=(o-13)+(y/2);
+		if(x<0){
+		x=0;}
+		for(i=x-1;i>=0;i--)
+		{
+			m[1][i]=s[t];t++;
+		}
+		int z=13-(o+(y/2));
+		if(z>0)
+		i=z;
+		else{
+		i=0;z=0;}
+		for(;i<o-x+z;i++)
+		{
+			m[0][i]=s[t];t++;
+		}
+		m[1][i-1]=s[t];
+		t++;
+		for(int j=1;j<=y/2;j++)
+		{
+			m[0][i]=s[t];t++;i++;
+		}
+		i--;
+		for(int j=1;j<=y/2;j++)
+		{
+			m[1][i]=s[t];t++;i--;
+		}
+		i--;t++;
+		for(int j=i;j>=x;j--)
+		{
+			m[1][j]=s[t];t++;
+		}
+		for(int j=0;j<z;j++)
+		{
+			m[0][j]=s[t];t++;
+		}
+	}
+	else
+	{
+		int t=0,i;
+		int x=(o-13)+(y/2)+1;
+		if(x<0){
+		x=0;}
+		for(i=x-1;i>=0;i--)
+		{
+			m[1][i]=s[t];t++;
+		}
+		int z=13-(o+(y/2)+1);
+		if(z>0)
+		i=z;
+		else{
+		i=0;z=0;}
+		for(;i<o-x+z;i++)
+		{
+			m[0][i]=s[t];t++;
+		}
+		m[1][i]=s[t];
+		t++;
+		for(int j=1;j<=y/2+1;j++)
+		{
+			m[0][i]=s[t];t++;i++;
+		}
+		i--;
+		for(int j=1;j<=y/2;j++)
+		{
+			m[1][i]=s[t];t++;i--;
+		}
+		i--;t++;
+		for(int j=i;j>=x;j--)
+		{
+			m[1][j]=s[t];t++;
+		}
+		for(int j=0;j<z;j++)
+		{
+			m[0][j]=s[t];t++;
+		}
+	}
+	for(int g=0;g<2;g++)
+	{
+		for(int h=0;h<13;h++)
+		{
+			cout<<m[g][h];
+		}
+		cout<<"\n";
+	}
+	return 0;
+}
